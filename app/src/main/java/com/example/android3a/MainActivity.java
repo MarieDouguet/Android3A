@@ -82,10 +82,11 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
 
                     List<Countries> countriesList = response.body().getCountries();
-                    Toast.makeText(getApplicationContext(),"API Success", Toast.LENGTH_SHORT).show();
-
-
+                    Toast.makeText(getApplicationContext(), "API Success", Toast.LENGTH_SHORT).show();
+                } else {
+                    showError();
                 }
+
             }
 
             @Override

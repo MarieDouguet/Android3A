@@ -13,7 +13,7 @@ public class Countries {
     private Integer TotalDeaths;
     private Integer NewRecovered;
     private Integer TotalRecovered;
-    private DateFormat Date;
+
 
     public String getCountries() {
         return Countries;
@@ -51,7 +51,4 @@ public class Countries {
         return TotalRecovered;
     }
 
-    public DateFormat getDate() {
-        return Date;
-    }
 }
