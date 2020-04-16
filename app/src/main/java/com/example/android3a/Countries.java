@@ -1,6 +1,17 @@
 package com.example.android3a;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 
 public class Countries {
 
@@ -13,7 +24,13 @@ public class Countries {
     private Integer TotalDeaths;
     private Integer NewRecovered;
     private Integer TotalRecovered;
+    Date date = new Date();
 
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dtStr = formatter.format(date);
+        return dtStr;
+    }
 
     public String getCountries() {
         return Countries;
