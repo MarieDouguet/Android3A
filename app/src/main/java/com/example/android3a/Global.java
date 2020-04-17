@@ -9,8 +9,6 @@ public class Global {
     private Integer NewRecovered;
     private Integer TotalRecovered;
 
-    public Global() {
-    }
 
     public Integer getNewConfirmed() {
         return NewConfirmed;

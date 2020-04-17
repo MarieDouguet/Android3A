@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RestSummaryResponse {
 
-    Global global = new Global();
+    Global Global;
     private List<Countries> Countries;
     Date date = new Date();
 
@@ -18,9 +18,8 @@ public class RestSummaryResponse {
     }
 
 
-    public String getGlobal() {
-        return String.valueOf(global.getNewConfirmed());
-
+    public Global getGlobal() {
+        return Global;
     }
 
     public List<com.example.android3a.Countries> getCountries() {

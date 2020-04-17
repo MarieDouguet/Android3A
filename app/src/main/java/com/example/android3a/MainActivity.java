@@ -1,11 +1,14 @@
 package com.example.android3a;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,14 +38,37 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        makeApiCall();
 
+        sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        List<Countries> countriesList = getDatafromCache();
+
+        if(countriesList != null ){
+            showList(countriesList);
+        }else{
+            makeApiCall();
+        }
+    }
+
+    private List<Countries> getDatafromCache() {
+        String jsonCountries = sharedPreferences.getString("jsonCountriesList", null );
+        if(jsonCountries == null) {
+            return null;
+        }else {
+
+            Type listType = new TypeToken<List<Countries>>() {}.getType();
+            return gson.fromJson(jsonCountries, listType);
+        }
     }
 
     private void showList(List<Countries> countriesList) {
@@ -58,9 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void makeApiCall() {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -74,10 +99,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String global = response.body().getGlobal();
+                    Global global = response.body().getGlobal();
                     List<Countries> countriesList = response.body().getCountries();
                     String date = response.body().getDate();
+                    saveList(countriesList);
                     showList(countriesList);
+
                 } else {
                     showError();
                 }
@@ -90,6 +117,19 @@ public class MainActivity extends AppCompatActivity {
                 showError();
             }
         });
+    }
+
+    private void saveList(List<Countries> countriesList) {
+
+        String jsonString = gson.toJson(countriesList);
+
+        sharedPreferences
+                .edit()
+                .putString("jsonCountriesList", jsonString)
+                .apply();
+
+        Toast.makeText(getApplicationContext(),"List Saved", Toast.LENGTH_SHORT).show();
+
     }
 
     private void showError(){
