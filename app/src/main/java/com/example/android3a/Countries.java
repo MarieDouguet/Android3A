@@ -4,18 +4,12 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
 public class Countries {
 
-    private String Countries;
+    private String Country;
     private String CountryCode;
     private String Slug;
     private Integer NewConfirmed;
@@ -32,8 +26,8 @@ public class Countries {
         return dtStr;
     }
 
-    public String getCountries() {
-        return Countries;
+    public String getCountry() {
+        return Country;
     }
 
     public String getCountryCode() {

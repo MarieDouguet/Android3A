@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,25 +40,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showList();
         makeApiCall();
 
     }
 
-    private void showList() {
+    private void showList(List<Countries> countriesList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<String> input = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            input.add("Test" + i);
-        }
-
-        // define an adapter
-        mAdapter = new ListAdapter(input);
+        mAdapter = new ListAdapter(countriesList);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -80,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
+                    String global = response.body().getGlobal();
                     List<Countries> countriesList = response.body().getCountries();
-                    Toast.makeText(getApplicationContext(), "API Success", Toast.LENGTH_SHORT).show();
+                    String date = response.body().getDate();
+                    showList(countriesList);
                 } else {
                     showError();
                 }
@@ -91,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
+
                 showError();
             }
         });
