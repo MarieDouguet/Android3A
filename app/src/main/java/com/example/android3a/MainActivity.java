@@ -1,6 +1,7 @@
 package com.example.android3a;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,9 +33,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListAdapter.OnCovidListener {
 
     private static final String BASE_URL = "https://api.covid19api.com/";
+    private static final String TAG = "MainActivity" ;
 
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListAdapter(countriesList);
+        mAdapter = new ListAdapter(countriesList, this);
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -137,4 +140,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onCovidClick(int position) {
+        Log.d(TAG, "onCovidClick: clicked.");
+
+        Intent intent = new Intent(this, CovidActivity.class);
+       // intent.putExtra("selected_country", mAdapter.get(position));
+        startActivity(intent);
+    }
 }
