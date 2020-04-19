@@ -11,45 +11,41 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
-
+    private SelectedCountry selectedCountry;
     private List<Countries> values;
-    private OnCovidListener mOnCovidListener;
 
-    public ListAdapter(List<Countries> values, OnCovidListener mOnCovidListener) {
+    public ListAdapter(SelectedCountry selectedCountry, List<Countries> values) {
+        this.selectedCountry = selectedCountry;
         this.values = values;
-        this.mOnCovidListener = mOnCovidListener;
     }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView txtHeader;
         TextView txtFooter;
         View layout;
-        OnCovidListener onCovidListener;
 
-        ViewHolder(View v, OnCovidListener onCovidListener) {
+        ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            this.onCovidListener = onCovidListener;
 
-            v.setOnClickListener(this);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedCountry.selectedCountry(values.get(getAdapterPosition()));
+                }
+            });
         }
 
-
-
-        @Override
-        public void onClick(View v) {
-            onCovidListener.onCovidClick(getAdapterPosition());
-        }
     }
 
-    public interface OnCovidListener{
-        void onCovidClick (int position);
+    public interface SelectedCountry{
+        void selectedCountry(Countries first_fragment);
     }
 
     public void add(int position, Countries item) {
@@ -78,7 +74,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 inflater.inflate(R.layout.row_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
-        return new ViewHolder(v, mOnCovidListener);
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
