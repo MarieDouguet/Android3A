@@ -3,11 +3,14 @@ package com.example.android3a;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -36,11 +39,11 @@ public class covidActivity2 extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_first);
-
 
         sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
         gson = new GsonBuilder()
@@ -140,4 +143,6 @@ public class covidActivity2 extends AppCompatActivity {
         // intent.putExtra("selected_country", mAdapter.get(position));
         startActivity(intent);
     }
+
+
 }

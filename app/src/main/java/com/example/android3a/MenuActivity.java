@@ -23,13 +23,13 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.menu_activity);
 
         button_global = (Button) findViewById(R.id.button_global);
-        /*button_global.setOnClickListener(new View.OnClickListener() {
+        button_global.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), covidActivity2.class);
+                Intent intent = new Intent(getApplicationContext(), globalFigures.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
         button_ListOfCountries = (Button) findViewById(R.id.button_listOfCountries);
         button_ListOfCountries.setOnClickListener(new View.OnClickListener() {

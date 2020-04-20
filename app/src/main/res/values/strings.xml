@@ -9,4 +9,5 @@
     <string name="button_listOfCountries">LIST OF COUNTRIES</string>
     <string name="Text_presentation">  If you want to have global figures of confirmed, dead and recovered people in the world : \n \n-> Click on \"GLOBAL\". \n \n  If you want to have details per country : \n\n -> Click on \"LIST OF COUNTRIES\".</string>
     <string name="stayathome">#StayAtHome</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
