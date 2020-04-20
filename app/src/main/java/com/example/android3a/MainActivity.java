@@ -42,11 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private RecyclerView recyclerView;
-    private ListAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private SharedPreferences sharedPreferences;
-    private Gson gson;
     private Button button_first;
 
 
@@ -59,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         button_first.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), covidActivity2.class);
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCovidClick(int position) {
         Log.d(TAG, "onCovidClick: clicked.");
 
-        Intent intent = new Intent(this, covidActivity2.class);
+        Intent intent = new Intent(this, MenuActivity.class);
         // intent.putExtra("selected_country", mAdapter.get(position));
         startActivity(intent);
     }

@@ -5,8 +5,8 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Click here !</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="button_global">GLOBAL</string>
+    <string name="button_listOfCountries">LIST OF COUNTRIES</string>
+    <string name="Text_presentation">  If you want to have global figures of confirmed, dead and recovered people in the world : \n \n-> Click on \"GLOBAL\". \n \n  If you want to have details per country : \n\n -> Click on \"LIST OF COUNTRIES\".</string>
+    <string name="stayathome">#StayAtHome</string>
 </resources>
