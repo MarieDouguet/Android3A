@@ -38,7 +38,7 @@ public class covidActivity2 extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private SharedPreferences sharedPreferences;
     private Gson gson;
-
+    private ListAdapter.OnItemClickListener onItemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class covidActivity2 extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListAdapter(countriesList);
+        mAdapter = new ListAdapter(countriesList, onItemClickListener);
         recyclerView.setAdapter(mAdapter);
     }
 

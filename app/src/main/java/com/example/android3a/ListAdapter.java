@@ -11,12 +11,12 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
-    private SelectedCountry selectedCountry;
     private List<Countries> values;
+    public OnItemClickListener listener;
 
-    public ListAdapter(SelectedCountry selectedCountry, List<Countries> values) {
-        this.selectedCountry = selectedCountry;
+    public ListAdapter(List<Countries> values, OnItemClickListener listener) {
         this.values = values;
+        this.listener = listener;
     }
 
     // Provide a reference to the views for each data item
@@ -34,14 +34,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
 
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectedCountry.selectedCountry(values.get(getAdapterPosition()));
+        }
+        public void bind(final List<Countries> values, final OnItemClickListener listener) {
+        layout.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(values);
                 }
             });
         }
-
     }
 
     public interface SelectedCountry{
@@ -56,11 +56,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void remove(int position) {
         values.remove(position);
         notifyItemRemoved(position);
-    }
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<Countries> myDataset) {
-        values = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
@@ -82,15 +77,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final Countries currentCountry = values.get(position);
-        holder.txtHeader.setText(currentCountry.getCountry());
-        holder.txtFooter.setText(currentCountry.getCountryCode());
+        holder.txtHeader.setText(values.get(position).getCountry());
+        holder.txtFooter.setText(values.get(position).getCountryCode());
+        holder.bind((List<Countries>) values.get(position), listener);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return values.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(List<Countries> values);
     }
 
 
