@@ -27,6 +27,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), globalFigures.class);
+
                 startActivity(intent);
             }
         });
@@ -46,14 +47,6 @@ public class MenuActivity extends AppCompatActivity {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false);
-    }
-
-    public void onCovidClick(int position) {
-        Log.d(TAG, "onCovidClick: clicked.");
-
-        Intent intent = new Intent(this, MenuActivity.class);
-        // intent.putExtra("selected_country", mAdapter.get(position));
-        startActivity(intent);
     }
 
 }

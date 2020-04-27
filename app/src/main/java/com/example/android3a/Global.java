@@ -24,23 +24,23 @@ public class Global {
 
     public String getNewDeaths() {
 
-        return "New dead : " + NewDeaths + " people";
+        return "New deaths : " + NewDeaths + " people";
 
     }
 
     public String getTotalDeaths() {
 
-        return "Total dead : " + TotalDeaths + " people";
+        return "Total deaths : " + TotalDeaths + " people";
     }
 
     public String getNewRecovered() {
 
-        return "New recovered people : " + NewRecovered + " people";
+        return "New recovered : " + NewRecovered + " people";
     }
 
     public String getTotalRecovered() {
 
-        return "Total recovered people : " + TotalRecovered + " people";
+        return "Total recovered : " + TotalRecovered + " people";
     }
 
 

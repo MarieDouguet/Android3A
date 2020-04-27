@@ -31,7 +31,6 @@ public class covidActivity2 extends AppCompatActivity {
 
 
     private static final String BASE_URL = "https://api.covid19api.com/";
-    private static final String TAG = "CovidActivity";
 
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
@@ -82,7 +81,17 @@ public class covidActivity2 extends AppCompatActivity {
             public void onItemClick(Countries values) {
 
                 Intent intent = new Intent(getApplicationContext(), DetailCountry_Activity.class);
-               // intent.putExtra("id", id);
+                // intent.putExtra("id", id);
+                intent.putExtra("txtHeader", values.getCountry());
+                intent.putExtra("txtFooter", values.getCountryCode());
+                intent.putExtra("textView_NC", values.getNewConfirmed());
+                intent.putExtra("textView_TC", values.getTotalConfirmed());
+                intent.putExtra("textView_ND", values.getNewDeaths());
+                intent.putExtra("textView_TD", values.getTotalDeaths());
+                intent.putExtra("textView_NR", values.getNewRecovered());
+                intent.putExtra("textView_TR", values.getTotalRecovered());
+                intent.putExtra("textView_date", values.getDate());
+
                 startActivity(intent);
             }
         });

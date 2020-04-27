@@ -1,9 +1,5 @@
 package com.example.android3a;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,43 +19,49 @@ public class Countries {
     public String getDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String dtStr = formatter.format(date);
-        return dtStr;
+        return "Updated at : " + dtStr;
     }
 
     public String getCountry() {
+
         return Country;
     }
 
     public String getCountryCode() {
-        return CountryCode;
+        return "Country code : " + CountryCode;
     }
 
     public String getSlug() {
         return Slug;
     }
 
-    public Integer getNewConfirmed() {
-        return NewConfirmed;
+    public String getNewConfirmed() {
+
+        return "New cases confirmed : " + NewConfirmed+ " people";
     }
 
-    public Integer getTotalConfirmed() {
-        return TotalConfirmed;
+    public String getTotalConfirmed() {
+
+        return  "Total confirmed : " + TotalConfirmed+ " people";
     }
 
-    public Integer getNewDeaths() {
-        return NewDeaths;
+    public String getNewDeaths() {
+
+        return "New deaths : " + NewDeaths+ " people";
     }
 
-    public Integer getTotalDeaths() {
-        return TotalDeaths;
+    public String getTotalDeaths() {
+
+        return  "Total deaths : " + TotalDeaths+ " people";
     }
 
-    public Integer getNewRecovered() {
-        return NewRecovered;
+    public String getNewRecovered() {
+        return "New recovered : "  + NewRecovered+ " people";
     }
 
-    public Integer getTotalRecovered() {
-        return TotalRecovered;
+    public String getTotalRecovered() {
+
+        return " Total recovered : " + TotalRecovered+ " people";
     }
 
 }
