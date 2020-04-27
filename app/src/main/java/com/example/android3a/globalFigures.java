@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -46,6 +48,8 @@ public class globalFigures extends AppCompatActivity {
     private TextView Text5;
     private TextView Text6;
     private TextView Text7;
+    private TextView Text8;
+
     private AdapterView adapter;
 
 
@@ -96,6 +100,7 @@ public class globalFigures extends AppCompatActivity {
         Text5 = (TextView) findViewById(R.id.textView5);
         Text6 = (TextView) findViewById(R.id.textView6);
         Text7 = (TextView) findViewById(R.id.textView7);
+        Text8 = (TextView) findViewById(R.id.textView8);
 
         Text2.setText(global.getNewConfirmed()+"");
         Text3.setText(global.getNewDeaths()+"");
@@ -103,6 +108,7 @@ public class globalFigures extends AppCompatActivity {
         Text5.setText(global.getTotalConfirmed()+"");
         Text6.setText(global.getTotalDeaths()+"");
         Text7.setText(global.getTotalRecovered()+"");
+        Text8.setText(global.getDate()+"");
 
     }
 

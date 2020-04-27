@@ -1,5 +1,8 @@
 package com.example.android3a;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Global {
 
     private Integer NewConfirmed;
@@ -8,6 +11,7 @@ public class Global {
     private Integer TotalDeaths;
     private Integer NewRecovered;
     private Integer TotalRecovered;
+    Date date = new Date();
 
 
     public String getNewConfirmed() {
@@ -37,5 +41,13 @@ public class Global {
     public String getTotalRecovered() {
 
         return "Total recovered people : " + TotalRecovered + " people";
+    }
+
+
+
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dtStr = formatter.format(date);
+        return "Updated at : " + dtStr;
     }
 }
