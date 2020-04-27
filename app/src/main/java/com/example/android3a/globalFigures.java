@@ -102,13 +102,13 @@ public class globalFigures extends AppCompatActivity {
         Text7 = (TextView) findViewById(R.id.textView7);
         Text8 = (TextView) findViewById(R.id.textView8);
 
-        Text2.setText(global.getNewConfirmed()+"");
-        Text3.setText(global.getNewDeaths()+"");
-        Text4.setText(global.getNewRecovered()+"");
-        Text5.setText(global.getTotalConfirmed()+"");
-        Text6.setText(global.getTotalDeaths()+"");
-        Text7.setText(global.getTotalRecovered()+"");
-        Text8.setText(global.getDate()+"");
+        Text2.setText(global.getNewConfirmed());
+        Text3.setText(global.getNewDeaths());
+        Text4.setText(global.getNewRecovered());
+        Text5.setText(global.getTotalConfirmed());
+        Text6.setText(global.getTotalDeaths());
+        Text7.setText(global.getTotalRecovered());
+        Text8.setText(global.getDate());
 
     }
 

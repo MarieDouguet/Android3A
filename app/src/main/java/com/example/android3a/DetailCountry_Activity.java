@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Date;
+
 public class DetailCountry_Activity extends AppCompatActivity {
 
     TextView textView_country;
@@ -65,7 +67,6 @@ public class DetailCountry_Activity extends AppCompatActivity {
         textView_NR.setText(NewRecovered);
         textView_TR.setText(TotalRecovered);
         textView_date.setText(Date);
-
 
     }
 

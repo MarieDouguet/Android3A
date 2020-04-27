@@ -5,8 +5,6 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:padding="6dip" >
 
-
-
     <TextView
         android:id="@+id/secondLine"
         android:layout_width="fill_parent"
@@ -23,13 +21,14 @@
         android:id="@+id/firstLine"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/secondLine"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
+        android:layout_above="@id/secondLine"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/imageView3"
         android:gravity="center_vertical"
         android:text="Example application"
+        android:textColor="#000000"
         android:textSize="16sp" />
 
     <ImageView
