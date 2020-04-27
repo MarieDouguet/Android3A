@@ -38,7 +38,6 @@ public class covidActivity2 extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private SharedPreferences sharedPreferences;
     private Gson gson;
-    private ListAdapter.OnItemClickListener onItemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +77,15 @@ public class covidActivity2 extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListAdapter(countriesList, onItemClickListener);
+        mAdapter = new ListAdapter(countriesList, new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Countries values) {
+
+                Intent intent = new Intent(getApplicationContext(), DetailCountry_Activity.class);
+               // intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -134,14 +141,6 @@ public class covidActivity2 extends AppCompatActivity {
     private void showError() {
         Toast.makeText(getApplicationContext(), "API error", Toast.LENGTH_SHORT).show();
 
-    }
-
-    public void onCovidClick(int position) {
-        Log.d(TAG, "onCovidClick: clicked.");
-
-        Intent intent = new Intent(getApplicationContext(), covidActivity2.class);
-        // intent.putExtra("selected_country", mAdapter.get(position));
-        startActivity(intent);
     }
 
 

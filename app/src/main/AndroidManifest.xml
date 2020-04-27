@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".globalFigures"></activity>
+        <activity android:name=".DetailCountry_Activity"></activity>
+        <activity android:name=".globalFigures" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".covidActivity2" />
         <activity

@@ -40,7 +40,12 @@ public class globalFigures extends AppCompatActivity {
     private Global global;
     SharedPreferences sharedPreferences;
     Gson gson;
-    private TextView Text;
+    private TextView Text2;
+    private TextView Text3;
+    private TextView Text4;
+    private TextView Text5;
+    private TextView Text6;
+    private TextView Text7;
     private AdapterView adapter;
 
 
@@ -84,9 +89,20 @@ public class globalFigures extends AppCompatActivity {
     public void setAdapter(AdapterView adapter){
 
     }
-    private void showObject(Global global) {
-        Text = (TextView) findViewById(R.id.textView2);
+    private void showGlobal(Global global) {
+        Text2 = (TextView) findViewById(R.id.textView2);
+        Text3 = (TextView) findViewById(R.id.textView3);
+        Text4 = (TextView) findViewById(R.id.textView4);
+        Text5 = (TextView) findViewById(R.id.textView5);
+        Text6 = (TextView) findViewById(R.id.textView6);
+        Text7 = (TextView) findViewById(R.id.textView7);
 
+        Text2.setText(global.getNewConfirmed()+"");
+        Text3.setText(global.getNewDeaths()+"");
+        Text4.setText(global.getNewRecovered()+"");
+        Text5.setText(global.getTotalConfirmed()+"");
+        Text6.setText(global.getTotalDeaths()+"");
+        Text7.setText(global.getTotalRecovered()+"");
 
     }
 
@@ -107,7 +123,7 @@ public class globalFigures extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Global global = response.body().getGlobal();
                     saveObject(global);
-                    showObject(global);
+                    showGlobal(global);
                 } else {
                     showError();
                 }

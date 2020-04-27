@@ -35,13 +35,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
 
         }
-        public void bind(final List<Countries> values, final OnItemClickListener listener) {
-        layout.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    listener.onItemClick(values);
-                }
-            });
-        }
     }
 
     public interface SelectedCountry{
@@ -79,7 +72,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         holder.txtHeader.setText(values.get(position).getCountry());
         holder.txtFooter.setText(values.get(position).getCountryCode());
-        holder.bind((List<Countries>) values.get(position), listener);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(values.get(position));
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -89,7 +87,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(List<Countries> values);
+        void onItemClick(Countries values);
     }
 
 

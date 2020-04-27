@@ -10,27 +10,32 @@ public class Global {
     private Integer TotalRecovered;
 
 
-    public Integer getNewConfirmed() {
-        return NewConfirmed;
+    public String getNewConfirmed() {
+        return "New cases confirmed : " + NewConfirmed + " people";
     }
 
-    public Integer getTotalConfirmed() {
-        return TotalConfirmed;
+    public String getTotalConfirmed() {
+        return "Total confirmed : " + TotalConfirmed+ " people";
     }
 
-    public Integer getNewDeaths() {
-        return NewDeaths;
+    public String getNewDeaths() {
+
+        return "New dead : " + NewDeaths + " people";
+
     }
 
-    public Integer getTotalDeaths() {
-        return TotalDeaths;
+    public String getTotalDeaths() {
+
+        return "Total dead : " + TotalDeaths + " people";
     }
 
-    public Integer getNewRecovered() {
-        return NewRecovered;
+    public String getNewRecovered() {
+
+        return "New recovered people : " + NewRecovered + " people";
     }
 
-    public Integer getTotalRecovered() {
-        return TotalRecovered;
+    public String getTotalRecovered() {
+
+        return "Total recovered people : " + TotalRecovered + " people";
     }
 }
