@@ -5,13 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -42,6 +43,7 @@ public class covidActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_first);
+
 
         sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
         gson = new GsonBuilder()
@@ -151,6 +153,4 @@ public class covidActivity2 extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "API error", Toast.LENGTH_SHORT).show();
 
     }
-
-
 }
