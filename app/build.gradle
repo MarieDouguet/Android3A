@@ -41,4 +41,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:21.0.3'
+    implementation 'com.mcxiaoke.volley:library:1.0.18'
+    implementation "androidx.drawerlayout:drawerlayout:1.0.0"
+
 }

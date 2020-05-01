@@ -1,12 +1,15 @@
 package com.example.android3a;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 
@@ -31,6 +34,9 @@ public class DetailCountry_Activity extends AppCompatActivity {
     String NewRecovered;
     String TotalRecovered;
     String Date;
+
+    DrawerLayout mDrawerLayout;
+    NavigationView navigationView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,9 @@ public class DetailCountry_Activity extends AppCompatActivity {
         textView_NR.setText(NewRecovered);
         textView_TR.setText(TotalRecovered);
         textView_date.setText(Date);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
     }
 

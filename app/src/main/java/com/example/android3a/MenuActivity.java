@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+
 public class MenuActivity extends AppCompatActivity {
 
     Button button_global;
@@ -22,6 +25,7 @@ public class MenuActivity extends AppCompatActivity {
     EditText etCountry;
     ProgressBar pbLoader;
     ListView lvRecent;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +59,27 @@ public class MenuActivity extends AppCompatActivity {
 
         lvRecent = (ListView) findViewById(R.id.lv_recent);
 
+        handler = new Handler();
+
+
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = etCountry.getText().toString();
-                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                String recherche = etCountry.getText().toString().trim();
+                    if(recherche.length() > 0) {
+                        pbLoader.setVisibility(View.VISIBLE);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(getApplicationContext(), covidActivity2.class);
+                                startActivity(intent);
+                            }
+                        },2000);
+
+
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Enter a country name",Toast.LENGTH_SHORT).show();
+                    }
             }
         });
 
