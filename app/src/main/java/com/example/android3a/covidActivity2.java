@@ -1,6 +1,11 @@
 package com.example.android3a;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -28,8 +34,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class covidActivity2 extends AppCompatActivity {
-
+public class covidActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private Toolbar toolbar;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
 
     private static final String BASE_URL = "https://api.covid19api.com/";
 
@@ -57,6 +65,52 @@ public class covidActivity2 extends AppCompatActivity {
         } else {
             makeApiCall();
         }
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout4);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view4);
+
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
+
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.isChecked()) {
+            menuItem.setChecked(false);
+        } else {
+            menuItem.setChecked(true);
+        }
+
+        mDrawerLayout.closeDrawer(GravityCompat.START, false);
+
+        switch (menuItem.getItemId()) {
+
+            case R.id.menu_principal:
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.global_figures:
+                intent = new Intent(getApplicationContext(), globalFigures.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.useful_links:
+                intent = new Intent(getApplicationContext(), LinksActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.a_propos:
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+        }
+
+        return true;
     }
 
     private List<Countries> getDatafromCache() {

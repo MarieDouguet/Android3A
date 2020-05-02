@@ -12,4 +12,25 @@
     <string name="title_activity_maps">Map</string>
     <string name="hintEditText">Name of the country</string>
     <string name="rechercher">Search</string>
+    <string name="menu_principal">Main menu</string>
+    <string name="global_figures">Global figures</string>
+    <string name="a_propos">About the app</string>
+    <string name="useful_links">Useful links</string>
+    <string name="countries">Countries</string>
+    <string name="open" />
+    <string name="close" />
+    <string name="about_the_app">
+        The coronavirus is the global pandemic that affects the world for several months now. \n
+        The virus is causing unprecedented health and economic havocs. </string>
+    <string name="about_question"> What is this app ? </string>
+    <string name="description_project">This application is a project made within the scope of the mobile programming lesson. \n \nIt draws up an inventory of total and new confirmed, dead and recovered people globally and per country. </string>
+    <string name="link1">https://www.gouvernement.fr/info-coronavirus</string>
+    <string name="link2">https://www.gouvernement.fr/info-coronavirus/orientation-medicale</string>
+    <string name="link3">https://www.who.int/</string>
+    <string name="link4">https://www.europeanlung.org/en/get-involved/european-patient-organisation-network/</string>
+    <string name="link5">https://www.blf.org.uk/support-for-you/coronavirus</string>
+    <string name="global">In the world :</string>
+    <string name="europe">In Europe :</string>
+    <string name="britain">"In UK : "</string>
+    <string name="france">"In France : "</string>
 </resources>

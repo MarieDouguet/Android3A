@@ -1,19 +1,28 @@
 package com.example.android3a;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Date;
 
-public class DetailCountry_Activity extends AppCompatActivity {
+public class DetailCountry_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView textView_country;
     TextView textView_countryCode;
@@ -35,8 +44,9 @@ public class DetailCountry_Activity extends AppCompatActivity {
     String TotalRecovered;
     String Date;
 
-    DrawerLayout mDrawerLayout;
-    NavigationView navigationView;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +84,66 @@ public class DetailCountry_Activity extends AppCompatActivity {
         textView_TR.setText(TotalRecovered);
         textView_date.setText(Date);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (country != null) {
+            toolbar.setTitle(country.toUpperCase());
+        } else {
+            //rediriger vers menu
+        }
+        setSupportActionBar(toolbar);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
+
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    ;
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_detail_country_, container, false);
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.isChecked()) {
+            menuItem.setChecked(false);
+        } else {
+            menuItem.setChecked(true);
+        }
+
+        mDrawerLayout.closeDrawer(GravityCompat.START, false);
+
+        switch (menuItem.getItemId()) {
+
+            case R.id.menu_principal:
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.global_figures:
+                intent = new Intent(getApplicationContext(), globalFigures.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.useful_links:
+                intent = new Intent(getApplicationContext(), LinksActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.a_propos:
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.countries:
+                intent = new Intent(getApplicationContext(), covidActivity2.class);
+                startActivity(intent);
+                finish();
+                return true;
+        }
+        
+        return true;
     }
 }

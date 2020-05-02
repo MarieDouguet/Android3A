@@ -42,19 +42,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         }
     }
 
-    public interface SelectedCountry {
-        void selectedCountry(Countries first_fragment);
-    }
-
-    public void add(int position, Countries item) {
-        values.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    public void remove(int position) {
-        values.remove(position);
-        notifyItemRemoved(position);
-    }
 
     // Create new views (invoked by the layout manager)
     @Override

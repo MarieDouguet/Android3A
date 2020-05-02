@@ -60,20 +60,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
-    }
-
-
-    public void onCovidClick(int position) {
-        Log.d(TAG, "onCovidClick: clicked.");
-
-        Intent intent = new Intent(this, MenuActivity.class);
-        // intent.putExtra("selected_country", mAdapter.get(position));
-        startActivity(intent);
-    }
 }

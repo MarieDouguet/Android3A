@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group_1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_principal"
+            android:checked="false"
+            android:icon="@drawable/ic_menu"
+            android:title="@string/menu_principal" />
+
+        <item
+            android:id="@+id/countries"
+            android:checked="false"
+            android:icon="@drawable/ic_place_black_24dp"
+            android:title="@string/countries" />
+
+        <item
+            android:id="@+id/global_figures"
+            android:checked="false"
+            android:icon="@drawable/ic_world"
+            android:title="@string/global_figures" />
+
+    </group>
+
+    <group
+        android:id="@+id/group_2"
+        android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/a_propos"
+            android:checked="false"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="@string/a_propos" />
+
+    </group>
+</menu>

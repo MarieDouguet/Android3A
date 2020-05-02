@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
@@ -24,7 +25,7 @@
         android:id="@+id/button_listOfCountries"
         android:layout_width="215dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="296dp"
         android:backgroundTint="#ED0606"
         android:text="@string/button_listOfCountries"
         android:textColor="@color/white"
@@ -32,24 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ellipsize="none"
-        android:fontFamily="monospace"
-        android:text="@string/Text_presentation"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_global"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
 
     <!-- <ImageView
          android:id="@+id/imageView"
@@ -79,18 +62,35 @@
          app:layout_constraintHorizontal_bias="0.498"
          app:layout_constraintStart_toStartOf="parent" /> -->
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ellipsize="none"
+        android:fontFamily="monospace"
+        android:text="@string/Text_presentation"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_global"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.542" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="68dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_listOfCountries"
-        app:layout_constraintVertical_bias="0.196">
+        app:layout_constraintTop_toBottomOf="@+id/button_listOfCountries">
 
         <EditText
             android:id="@+id/et_country"
@@ -123,7 +123,7 @@
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <ListView
         android:id="@+id/lv_recent"
