@@ -14,8 +14,10 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".DetailCountry_Activity" />
         <activity android:name=".globalFigures" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".covidActivity2" />
+        <activity android:name=".MenuActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".covidActivity2"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

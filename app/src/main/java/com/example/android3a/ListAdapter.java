@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
@@ -81,6 +82,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     public interface OnItemClickListener {
         void onItemClick(Countries values);
     }
-
-    ;
+     public void filteredList(List<Countries> filteredList){
+        values = filteredList;
+        notifyDataSetChanged();
+     }
 }

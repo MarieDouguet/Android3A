@@ -8,16 +8,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -26,6 +25,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +39,8 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
 
+    private EditText editText;
+
     private static final String BASE_URL = "https://api.covid19api.com/";
 
     private RecyclerView recyclerView;
@@ -46,19 +48,19 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
     private RecyclerView.LayoutManager layoutManager;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+    private List<Countries> countriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_first);
 
-
         sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
         gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
-        List<Countries> countriesList = getDatafromCache();
+        countriesList = getDatafromCache();
 
         if (countriesList != null) {
             showList(countriesList);
@@ -75,7 +77,37 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        editText = (EditText) findViewById(R.id.edit_text);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
     }
+    private void filter(String text){
+        ArrayList<Countries> filteredList = new ArrayList<>();
+
+        for(Countries item : countriesList){
+            if (item.getCountry().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        mAdapter.filteredList(filteredList);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.isChecked()) {
@@ -207,4 +239,5 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         Toast.makeText(getApplicationContext(), "API error", Toast.LENGTH_SHORT).show();
 
     }
+
 }

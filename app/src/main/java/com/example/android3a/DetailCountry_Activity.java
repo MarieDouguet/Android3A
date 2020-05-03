@@ -48,7 +48,6 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
     private NavigationView navigationView;
     private Toolbar toolbar;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_country_);

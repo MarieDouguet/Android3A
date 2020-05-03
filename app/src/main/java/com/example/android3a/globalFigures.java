@@ -6,20 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,10 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,9 +35,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
 
 
     private static final String BASE_URL = "https://api.covid19api.com/";
-    private static final String TAG = "globalFigures";
 
-    private Global global;
     SharedPreferences sharedPreferences;
     Gson gson;
     private TextView Text2;
@@ -74,7 +63,11 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
 
         Global global = getDatafromCache();
 
-        makeApiCall();
+        if (global!= null) {
+            showGlobal(global);
+        } else {
+            makeApiCall();
+        }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout3);
         navigationView = (NavigationView) findViewById(R.id.navigation_view3);
@@ -137,10 +130,6 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
         }
     }
 
-
-    public void setAdapter(AdapterView adapter){
-
-    }
     private void showGlobal(Global global) {
         Text2 = (TextView) findViewById(R.id.textView2);
         Text3 = (TextView) findViewById(R.id.textView3);

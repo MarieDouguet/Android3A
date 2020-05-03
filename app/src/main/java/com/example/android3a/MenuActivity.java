@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 
+import java.util.List;
+
 public class MenuActivity extends AppCompatActivity {
 
     Button button_global;
@@ -26,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
     ProgressBar pbLoader;
     ListView lvRecent;
     private Handler handler;
+    List<Countries> countriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +69,20 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String recherche = etCountry.getText().toString().trim();
-                    if(recherche.length() > 0) {
-                        pbLoader.setVisibility(View.VISIBLE);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(getApplicationContext(), covidActivity2.class);
-                                startActivity(intent);
-                            }
-                        },2000);
+                if (recherche.length() > 0) {
+                    pbLoader.setVisibility(View.VISIBLE);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(getApplicationContext(), covidActivity2.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 2000);
 
-
-                    }else {
-                        Toast.makeText(getApplicationContext(), "Enter a country name",Toast.LENGTH_SHORT).show();
-                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter a country name", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

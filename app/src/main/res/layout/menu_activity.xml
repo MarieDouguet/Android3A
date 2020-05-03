@@ -34,34 +34,6 @@
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- <ImageView
-         android:id="@+id/imageView"
-         android:layout_width="240dp"
-         android:layout_height="182dp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.497"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/button_listOfCountries"
-         app:layout_constraintVertical_bias="0.792"
-         app:srcCompat="@drawable/globe_mask" />
-
-      <TextView
-         android:id="@+id/stayathome"
-         android:layout_width="128dp"
-         android:layout_height="30dp"
-         android:layout_marginBottom="16dp"
-         android:fontFamily="sans-serif-condensed"
-         android:text="@string/stayathome"
-         android:textAlignment="center"
-         android:textColor="#FA0404"
-         android:textSize="14sp"
-         android:textStyle="bold|italic"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.498"
-         app:layout_constraintStart_toStartOf="parent" /> -->
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
