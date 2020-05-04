@@ -8,15 +8,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android3a.R;
+import com.example.android3a.presentation.model.Countries;
 
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
 
-    private List<DetailCountry_Activity.Countries> values;
+    private List<Countries> values;
     public OnItemClickListener listener;
 
-    public ListAdapter(List<DetailCountry_Activity.Countries> values, OnItemClickListener listener) {
+    public ListAdapter(List<Countries> values, OnItemClickListener listener) {
         this.values = values;
         this.listener = listener;
     }
@@ -77,9 +78,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     }
 
     public interface OnItemClickListener {
-        void onItemClick(DetailCountry_Activity.Countries values);
+        void onItemClick(Countries values);
     }
-     public void filteredList(List<DetailCountry_Activity.Countries> filteredList){
+     public void filteredList(List<Countries> filteredList){
         values = filteredList;
         notifyDataSetChanged();
      }

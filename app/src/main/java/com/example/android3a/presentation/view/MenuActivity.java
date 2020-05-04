@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.android3a.R;
+import com.example.android3a.presentation.model.Countries;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
     ProgressBar pbLoader;
     ListView lvRecent;
     private Handler handler;
-    List<DetailCountry_Activity.Countries> countriesList;
+    List<Countries> countriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.example.android3a.R;
 import com.example.android3a.data.CovidAPI;
+import com.example.android3a.presentation.controller.covidController;
+import com.example.android3a.presentation.controller.globalFiguresController;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,8 +38,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class globalFigures extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
-    private static final String BASE_URL = "https://api.covid19api.com/";
-
     SharedPreferences sharedPreferences;
     Gson gson;
     private TextView Text2;
@@ -52,24 +52,23 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
+    private globalFiguresController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global_figures);
 
-        sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
-        gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
-        CovidAPI.Global global = getDatafromCache();
+        controller = new globalFiguresController(
+                this,
+                gson = new GsonBuilder()
+                        .setLenient()
+                        .create(),
+                sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE)
+        );
 
-        if (global!= null) {
-            showGlobal(global);
-        } else {
-            makeApiCall();
-        }
+        controller.onStart();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout3);
         navigationView = (NavigationView) findViewById(R.id.navigation_view3);
@@ -119,20 +118,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
-
-    private CovidAPI.Global getDatafromCache() {
-        String jsonGlobal = sharedPreferences.getString("jsonGlobal", null);
-        if (jsonGlobal == null) {
-            return null;
-        } else {
-
-            Type global = new TypeToken<CovidAPI.Global>() {
-            }.getType();
-            return gson.fromJson(jsonGlobal, global);
-        }
-    }
-
-    private void showGlobal(CovidAPI.Global global) {
+    public void showGlobal(CovidAPI.Global global) {
         Text2 = (TextView) findViewById(R.id.textView2);
         Text3 = (TextView) findViewById(R.id.textView3);
         Text4 = (TextView) findViewById(R.id.textView4);
@@ -151,52 +137,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
 
     }
 
-    private void makeApiCall() {
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        CovidAPI covidAPI = retrofit.create(CovidAPI.class);
-
-        Call<covidActivity2.RestSummaryResponse> call = covidAPI.getSummaryResponse();
-        call.enqueue(new Callback<covidActivity2.RestSummaryResponse>() {
-            @Override
-            public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    CovidAPI.Global global = response.body().getGlobal();
-                    saveObject(global);
-                    showGlobal(global);
-                } else {
-                    showError();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<covidActivity2.RestSummaryResponse> call, Throwable t) {
-
-                showError();
-            }
-        });
-    }
-
-    private void saveObject(CovidAPI.Global global) {
-
-        String jsonString = gson.toJson(global);
-
-        sharedPreferences
-                .edit()
-                .putString("jsonGlobalFigures", jsonString)
-                .apply();
-
-        Toast.makeText(getApplicationContext(), "Figures Saved", Toast.LENGTH_SHORT).show();
-
-    }
-
-    private void showError() {
+    public void showError() {
         Toast.makeText(getApplicationContext(), "API error", Toast.LENGTH_SHORT).show();
 
     }

@@ -1,15 +1,12 @@
 package com.example.android3a.presentation.controller;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.android3a.data.CovidAPI;
-import com.example.android3a.presentation.model.Countries;
-import com.example.android3a.presentation.view.DetailCountry_Activity;
 import com.example.android3a.presentation.view.covidActivity2;
+import com.example.android3a.presentation.view.globalFigures;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -21,49 +18,43 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class covidController {
+public class globalFiguresController {
 
-    private covidActivity2 view;
+    private globalFigures view;
     private Gson gson;
     private SharedPreferences sharedPreferences;
-    public static List<Countries> countriesList;
     private static final String BASE_URL = "https://api.covid19api.com/";
 
 
-    public covidController(covidActivity2 view, Gson gson, SharedPreferences sharedPreferences) {
-        this.view = view;
-        this.gson = gson;
-        this.sharedPreferences = sharedPreferences;
+    public globalFiguresController(globalFigures view, Gson gson, SharedPreferences sharedPreferences){
+            this.view= view;
+            this.gson=gson;
+            this.sharedPreferences=sharedPreferences;
     }
 
     public void onStart() {
+        CovidAPI.Global global = getDatafromCache();
 
-        countriesList = getDatafromCache();
-
-        if (countriesList != null) {
-            view.showList(countriesList);
+        if (global!= null) {
+            view.showGlobal(global);
         } else {
             makeApiCall();
         }
-
-
     }
 
-    public void saveList(List<Countries> countriesList) {
+    private CovidAPI.Global getDatafromCache() {
+        String jsonGlobal = sharedPreferences.getString("jsonGlobal", null);
+        if (jsonGlobal == null) {
+            return null;
+        } else {
 
-        String jsonString = gson.toJson(countriesList);
-
-        sharedPreferences
-                .edit()
-                .putString("jsonCountriesList", jsonString)
-                .apply();
-
-        Toast.makeText(view.getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
-
+            Type global = new TypeToken<CovidAPI.Global>() {
+            }.getType();
+            return gson.fromJson(jsonGlobal, global);
+        }
     }
 
-    public void makeApiCall() {
-
+    private void makeApiCall() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -78,11 +69,8 @@ public class covidController {
             public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     CovidAPI.Global global = response.body().getGlobal();
-                    List<Countries> countriesList = response.body().getCountries();
-                    String date = response.body().getDate();
-                    saveList(countriesList);
-                    view.showList(countriesList);
-
+                    saveObject(global);
+                    view.showGlobal(global);
                 } else {
                     view.showError();
                 }
@@ -96,16 +84,16 @@ public class covidController {
         });
     }
 
-    public List<Countries> getDatafromCache() {
-        String jsonCountries = sharedPreferences.getString("jsonCountriesList", null);
-        if (jsonCountries == null) {
-            return null;
-        } else {
+    private void saveObject(CovidAPI.Global global) {
 
-            Type listType = new TypeToken<List<Countries>>() {
-            }.getType();
-            return gson.fromJson(jsonCountries, listType);
-        }
+        String jsonString = gson.toJson(global);
+
+        sharedPreferences
+                .edit()
+                .putString("jsonGlobalFigures", jsonString)
+                .apply();
+
+        Toast.makeText(view.getApplicationContext(), "Figures Saved", Toast.LENGTH_SHORT).show();
+
     }
-
 }

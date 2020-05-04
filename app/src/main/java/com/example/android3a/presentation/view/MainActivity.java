@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.android3a.R;
-import com.example.android3a.presentation.controller.MainController;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,16 +16,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button_first;
 
-    private MainController controller;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        controller = new MainController();
-        controller.onButtonClick();
 
         button_first = (Button) findViewById(R.id.button_first);
         button_first.setOnClickListener(new View.OnClickListener() {

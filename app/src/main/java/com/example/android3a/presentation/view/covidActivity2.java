@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.android3a.R;
 import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.controller.covidController;
+import com.example.android3a.presentation.model.Countries;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,7 +42,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class covidActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class covidActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
@@ -51,27 +52,34 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    SharedPreferences sharedPreferences;
+    Gson gson;
 
-    private covidController controller;
+    covidController controller;
+    private List<Countries> countriesList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_first);
 
+
         controller = new covidController(
                 this,
-                new GsonBuilder()
+                gson = new GsonBuilder()
                         .setLenient()
                         .create(),
-                getSharedPreferences("application_esiea", Context.MODE_PRIVATE)
+                sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE)
         );
         controller.onStart();
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout4);
         navigationView = (NavigationView) findViewById(R.id.navigation_view4);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -91,10 +99,22 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
             @Override
             public void afterTextChanged(Editable s) {
-                controller.filter(s.toString());
+                filter(s.toString());
             }
         });
 
+    }
+
+    public void filter(String text) {
+        ArrayList<Countries> filteredList = new ArrayList<>();
+        countriesList = controller.countriesList;
+
+        for (Countries item : countriesList) {
+            if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+        mAdapter.filteredList(filteredList);
     }
 
     @Override
@@ -134,7 +154,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    public void showList(List<DetailCountry_Activity.Countries> countriesList) {
+    public void showList(List<Countries> countriesList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -143,7 +163,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
         mAdapter = new ListAdapter(countriesList, new ListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(DetailCountry_Activity.Countries values) {
+            public void onItemClick(Countries values) {
 
                 Intent intent = new Intent(getApplicationContext(), DetailCountry_Activity.class);
                 // intent.putExtra("id", id);
@@ -171,7 +191,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
     public static class RestSummaryResponse implements Parcelable {
 
         CovidAPI.Global Global;
-        private List<DetailCountry_Activity.Countries> Countries;
+        private List<Countries> Countries;
         Date date = new Date();
 
 
@@ -201,7 +221,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
             return Global;
         }
 
-        public List<DetailCountry_Activity.Countries> getCountries() {
+        public List<Countries> getCountries() {
             return Countries;
         }
 
