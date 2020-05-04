@@ -1,25 +1,22 @@
-package com.example.android3a;
+package com.example.android3a.presentation.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.drawerlayout.widget.DrawerLayout.DrawerListener;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DetailCountry_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -144,5 +141,68 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
         }
         
         return true;
+    }
+
+    public static class Countries {
+
+        private String Country;
+        private String CountryCode;
+        private String Slug;
+        private Integer NewConfirmed;
+        private Integer TotalConfirmed;
+        private Integer NewDeaths;
+        private Integer TotalDeaths;
+        private Integer NewRecovered;
+        private Integer TotalRecovered;
+        Date date = new Date();
+
+        public String getDate() {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String dtStr = formatter.format(date);
+            return "Updated at : " + dtStr;
+        }
+
+        public String getCountry() {
+
+            return Country;
+        }
+
+        public String getCountryCode() {
+            return "Country code : " + CountryCode;
+        }
+
+        public String getSlug() {
+            return Slug;
+        }
+
+        public String getNewConfirmed() {
+
+            return "New cases confirmed : " + NewConfirmed+ " people";
+        }
+
+        public String getTotalConfirmed() {
+
+            return  "Total confirmed : " + TotalConfirmed+ " people";
+        }
+
+        public String getNewDeaths() {
+
+            return "New deaths : " + NewDeaths+ " people";
+        }
+
+        public String getTotalDeaths() {
+
+            return  "Total deaths : " + TotalDeaths+ " people";
+        }
+
+        public String getNewRecovered() {
+            return "New recovered : "  + NewRecovered+ " people";
+        }
+
+        public String getTotalRecovered() {
+
+            return " Total recovered : " + TotalRecovered+ " people";
+        }
+
     }
 }

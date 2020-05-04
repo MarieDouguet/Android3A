@@ -1,4 +1,4 @@
-package com.example.android3a;
+package com.example.android3a.presentation.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android3a.R;
+import com.example.android3a.data.CovidAPI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -61,7 +63,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
                 .setLenient()
                 .create();
 
-        Global global = getDatafromCache();
+        CovidAPI.Global global = getDatafromCache();
 
         if (global!= null) {
             showGlobal(global);
@@ -118,19 +120,19 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
     }
 
 
-    private Global getDatafromCache() {
+    private CovidAPI.Global getDatafromCache() {
         String jsonGlobal = sharedPreferences.getString("jsonGlobal", null);
         if (jsonGlobal == null) {
             return null;
         } else {
 
-            Type global = new TypeToken<Global>() {
+            Type global = new TypeToken<CovidAPI.Global>() {
             }.getType();
             return gson.fromJson(jsonGlobal, global);
         }
     }
 
-    private void showGlobal(Global global) {
+    private void showGlobal(CovidAPI.Global global) {
         Text2 = (TextView) findViewById(R.id.textView2);
         Text3 = (TextView) findViewById(R.id.textView3);
         Text4 = (TextView) findViewById(R.id.textView4);
@@ -159,12 +161,12 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
 
         CovidAPI covidAPI = retrofit.create(CovidAPI.class);
 
-        Call<RestSummaryResponse> call = covidAPI.getSummaryResponse();
-        call.enqueue(new Callback<RestSummaryResponse>() {
+        Call<covidActivity2.RestSummaryResponse> call = covidAPI.getSummaryResponse();
+        call.enqueue(new Callback<covidActivity2.RestSummaryResponse>() {
             @Override
-            public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
+            public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Global global = response.body().getGlobal();
+                    CovidAPI.Global global = response.body().getGlobal();
                     saveObject(global);
                     showGlobal(global);
                 } else {
@@ -174,14 +176,14 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
             }
 
             @Override
-            public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
+            public void onFailure(Call<covidActivity2.RestSummaryResponse> call, Throwable t) {
 
                 showError();
             }
         });
     }
 
-    private void saveObject(Global global) {
+    private void saveObject(CovidAPI.Global global) {
 
         String jsonString = gson.toJson(global);
 

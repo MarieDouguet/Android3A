@@ -1,4 +1,4 @@
-package com.example.android3a;
+package com.example.android3a.presentation.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,19 +13,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android3a.R;
+import com.example.android3a.data.CovidAPI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,7 +54,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
     private RecyclerView.LayoutManager layoutManager;
     private SharedPreferences sharedPreferences;
     private Gson gson;
-    private List<Countries> countriesList;
+    private List<DetailCountry_Activity.Countries> countriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +104,9 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
     }
     private void filter(String text){
-        ArrayList<Countries> filteredList = new ArrayList<>();
+        ArrayList<DetailCountry_Activity.Countries> filteredList = new ArrayList<>();
 
-        for(Countries item : countriesList){
+        for(DetailCountry_Activity.Countries item : countriesList){
             if (item.getCountry().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
@@ -145,19 +151,19 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    private List<Countries> getDatafromCache() {
+    private List<DetailCountry_Activity.Countries> getDatafromCache() {
         String jsonCountries = sharedPreferences.getString("jsonCountriesList", null);
         if (jsonCountries == null) {
             return null;
         } else {
 
-            Type listType = new TypeToken<List<Countries>>() {
+            Type listType = new TypeToken<List<DetailCountry_Activity.Countries>>() {
             }.getType();
             return gson.fromJson(jsonCountries, listType);
         }
     }
 
-    private void showList(List<Countries> countriesList) {
+    private void showList(List<DetailCountry_Activity.Countries> countriesList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -166,7 +172,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
         mAdapter = new ListAdapter(countriesList, new ListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Countries values) {
+            public void onItemClick(DetailCountry_Activity.Countries values) {
 
                 Intent intent = new Intent(getApplicationContext(), DetailCountry_Activity.class);
                 // intent.putExtra("id", id);
@@ -202,8 +208,8 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
             @Override
             public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Global global = response.body().getGlobal();
-                    List<Countries> countriesList = response.body().getCountries();
+                    CovidAPI.Global global = response.body().getGlobal();
+                    List<DetailCountry_Activity.Countries> countriesList = response.body().getCountries();
                     String date = response.body().getDate();
                     saveList(countriesList);
                     showList(countriesList);
@@ -222,7 +228,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         });
     }
 
-    private void saveList(List<Countries> countriesList) {
+    private void saveList(List<DetailCountry_Activity.Countries> countriesList) {
 
         String jsonString = gson.toJson(countriesList);
 
@@ -240,4 +246,50 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
     }
 
+    public static class RestSummaryResponse implements Parcelable {
+
+        CovidAPI.Global Global;
+        private List<DetailCountry_Activity.Countries> Countries;
+        Date date = new Date();
+
+
+        protected RestSummaryResponse(Parcel in) {
+        }
+
+        public static final Creator<RestSummaryResponse> CREATOR = new Creator<RestSummaryResponse>() {
+            @Override
+            public RestSummaryResponse createFromParcel(Parcel in) {
+                return new RestSummaryResponse(in);
+            }
+
+            @Override
+            public RestSummaryResponse[] newArray(int size) {
+                return new RestSummaryResponse[size];
+            }
+        };
+
+        public String getDate() {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String dtStr = formatter.format(date);
+            return dtStr;
+        }
+
+
+        public CovidAPI.Global getGlobal() {
+            return Global;
+        }
+
+        public List<DetailCountry_Activity.Countries> getCountries() {
+            return Countries;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+        }
+    }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LinksActivity">
+    tools:context=".presentation.view.LinksActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

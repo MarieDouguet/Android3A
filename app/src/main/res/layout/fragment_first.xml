@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".covidActivity2">
+    tools:context=".presentation.view.covidActivity2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

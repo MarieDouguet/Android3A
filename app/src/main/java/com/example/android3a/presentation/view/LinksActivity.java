@@ -1,4 +1,4 @@
-package com.example.android3a;
+package com.example.android3a.presentation.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,9 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class LinksActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{

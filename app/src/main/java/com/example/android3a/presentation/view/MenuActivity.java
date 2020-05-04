@@ -1,21 +1,18 @@
-package com.example.android3a;
+package com.example.android3a.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
+import com.example.android3a.R;
 
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class MenuActivity extends AppCompatActivity {
     ProgressBar pbLoader;
     ListView lvRecent;
     private Handler handler;
-    List<Countries> countriesList;
+    List<DetailCountry_Activity.Countries> countriesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

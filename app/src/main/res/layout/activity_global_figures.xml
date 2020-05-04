@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".globalFigures">
+    tools:context=".presentation.view.globalFigures">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
