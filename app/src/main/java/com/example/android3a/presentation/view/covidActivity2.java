@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.android3a.R;
 import com.example.android3a.data.CovidAPI;
+import com.example.android3a.presentation.controller.covidController;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,36 +48,28 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
     private EditText editText;
 
-    private static final String BASE_URL = "https://api.covid19api.com/";
-
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private SharedPreferences sharedPreferences;
-    private Gson gson;
-    private List<DetailCountry_Activity.Countries> countriesList;
+
+    private covidController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_first);
 
-        sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE);
-        gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        countriesList = getDatafromCache();
-
-        if (countriesList != null) {
-            showList(countriesList);
-        } else {
-            makeApiCall();
-        }
+        controller = new covidController(
+                this,
+                new GsonBuilder()
+                        .setLenient()
+                        .create(),
+                getSharedPreferences("application_esiea", Context.MODE_PRIVATE)
+        );
+        controller.onStart();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout4);
         navigationView = (NavigationView) findViewById(R.id.navigation_view4);
-
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
 
@@ -98,20 +91,10 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+                controller.filter(s.toString());
             }
         });
 
-    }
-    private void filter(String text){
-        ArrayList<DetailCountry_Activity.Countries> filteredList = new ArrayList<>();
-
-        for(DetailCountry_Activity.Countries item : countriesList){
-            if (item.getCountry().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }
-        }
-        mAdapter.filteredList(filteredList);
     }
 
     @Override
@@ -151,19 +134,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-    private List<DetailCountry_Activity.Countries> getDatafromCache() {
-        String jsonCountries = sharedPreferences.getString("jsonCountriesList", null);
-        if (jsonCountries == null) {
-            return null;
-        } else {
-
-            Type listType = new TypeToken<List<DetailCountry_Activity.Countries>>() {
-            }.getType();
-            return gson.fromJson(jsonCountries, listType);
-        }
-    }
-
-    private void showList(List<DetailCountry_Activity.Countries> countriesList) {
+    public void showList(List<DetailCountry_Activity.Countries> countriesList) {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -192,56 +163,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         recyclerView.setAdapter(mAdapter);
     }
 
-
-    private void makeApiCall() {
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        CovidAPI covidAPI = retrofit.create(CovidAPI.class);
-
-        Call<RestSummaryResponse> call = covidAPI.getSummaryResponse();
-        call.enqueue(new Callback<RestSummaryResponse>() {
-            @Override
-            public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    CovidAPI.Global global = response.body().getGlobal();
-                    List<DetailCountry_Activity.Countries> countriesList = response.body().getCountries();
-                    String date = response.body().getDate();
-                    saveList(countriesList);
-                    showList(countriesList);
-
-                } else {
-                    showError();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
-
-                showError();
-            }
-        });
-    }
-
-    private void saveList(List<DetailCountry_Activity.Countries> countriesList) {
-
-        String jsonString = gson.toJson(countriesList);
-
-        sharedPreferences
-                .edit()
-                .putString("jsonCountriesList", jsonString)
-                .apply();
-
-        Toast.makeText(getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
-
-    }
-
-    private void showError() {
+    public void showError() {
         Toast.makeText(getApplicationContext(), "API error", Toast.LENGTH_SHORT).show();
 
     }
