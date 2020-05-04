@@ -3,6 +3,7 @@ package com.example.android3a.presentation.controller;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.android3a.Singletons;
 import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.view.covidActivity2;
 import com.example.android3a.presentation.view.globalFigures;
@@ -10,20 +11,17 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class globalFiguresController {
 
     private globalFigures view;
     private Gson gson;
     private SharedPreferences sharedPreferences;
-    private static final String BASE_URL = "https://api.covid19api.com/";
+
 
 
     public globalFiguresController(globalFigures view, Gson gson, SharedPreferences sharedPreferences){
@@ -56,14 +54,9 @@ public class globalFiguresController {
 
     private void makeApiCall() {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
 
-        CovidAPI covidAPI = retrofit.create(CovidAPI.class);
 
-        Call<covidActivity2.RestSummaryResponse> call = covidAPI.getSummaryResponse();
+        Call<covidActivity2.RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
         call.enqueue(new Callback<covidActivity2.RestSummaryResponse>() {
             @Override
             public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {

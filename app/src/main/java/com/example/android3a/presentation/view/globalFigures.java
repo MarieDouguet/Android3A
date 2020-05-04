@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android3a.R;
+import com.example.android3a.Singletons;
 import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.controller.covidController;
 import com.example.android3a.presentation.controller.globalFiguresController;
@@ -62,10 +63,8 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
 
         controller = new globalFiguresController(
                 this,
-                gson = new GsonBuilder()
-                        .setLenient()
-                        .create(),
-                sharedPreferences = getSharedPreferences("application_esiea", Context.MODE_PRIVATE)
+                Singletons.getGson(),
+                Singletons.getSharedPreferences(getApplicationContext())
         );
 
         controller.onStart();

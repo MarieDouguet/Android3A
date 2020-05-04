@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.android3a.Singletons;
 import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.model.Countries;
 import com.example.android3a.presentation.view.DetailCountry_Activity;
@@ -64,15 +65,7 @@ public class covidController {
 
     public void makeApiCall() {
 
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        CovidAPI covidAPI = retrofit.create(CovidAPI.class);
-
-        Call<covidActivity2.RestSummaryResponse> call = covidAPI.getSummaryResponse();
+        Call<covidActivity2.RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
         call.enqueue(new Callback<covidActivity2.RestSummaryResponse>() {
             @Override
             public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {
