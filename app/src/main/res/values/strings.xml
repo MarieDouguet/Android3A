@@ -33,4 +33,12 @@
     <string name="europe">In Europe :</string>
     <string name="britain">"In UK : "</string>
     <string name="france">"In France : "</string>
+    <string name="favorites">Favorites</string>
+    <string-array name="menu">
+        <item>Menu</item>
+        <item>Countries</item>
+        <item> Global </item>
+        <item>Useful links</item>
+        <item>About the app</item>
+    </string-array>
 </resources>

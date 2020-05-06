@@ -3,6 +3,7 @@ package com.example.android3a.presentation.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,12 +32,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         TextView txtHeader;
         TextView txtFooter;
         View layout;
+        Button button;
 
         ViewHolder(View v) {
             super(v);
             layout = v;
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            button = (Button) v.findViewById(R.id.favBtn);
 
         }
     }

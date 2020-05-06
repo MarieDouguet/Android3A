@@ -22,6 +22,7 @@ import com.example.android3a.Singletons;
 import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.controller.covidController;
 import com.example.android3a.presentation.controller.globalFiguresController;
+import com.example.android3a.presentation.model.Global;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,6 +55,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     private globalFiguresController controller;
+    Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +119,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
-    public void showGlobal(CovidAPI.Global global) {
+    public void showGlobal(Global global) {
         Text2 = (TextView) findViewById(R.id.textView2);
         Text3 = (TextView) findViewById(R.id.textView3);
         Text4 = (TextView) findViewById(R.id.textView4);

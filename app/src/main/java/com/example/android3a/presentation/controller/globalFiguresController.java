@@ -5,6 +5,8 @@ import android.widget.Toast;
 
 import com.example.android3a.Singletons;
 import com.example.android3a.data.CovidAPI;
+import com.example.android3a.presentation.model.Global;
+import com.example.android3a.presentation.model.RestSummaryResponse;
 import com.example.android3a.presentation.view.covidActivity2;
 import com.example.android3a.presentation.view.globalFigures;
 import com.google.gson.Gson;
@@ -21,6 +23,7 @@ public class globalFiguresController {
     private globalFigures view;
     private Gson gson;
     private SharedPreferences sharedPreferences;
+    Global global;
 
 
 
@@ -31,7 +34,7 @@ public class globalFiguresController {
     }
 
     public void onStart() {
-        CovidAPI.Global global = getDatafromCache();
+        Global global = getDatafromCache();
 
         if (global!= null) {
             view.showGlobal(global);
@@ -40,13 +43,13 @@ public class globalFiguresController {
         }
     }
 
-    private CovidAPI.Global getDatafromCache() {
+    private Global getDatafromCache() {
         String jsonGlobal = sharedPreferences.getString("jsonGlobal", null);
         if (jsonGlobal == null) {
             return null;
         } else {
 
-            Type global = new TypeToken<CovidAPI.Global>() {
+            Type global = new TypeToken<Global>() {
             }.getType();
             return gson.fromJson(jsonGlobal, global);
         }
@@ -56,12 +59,12 @@ public class globalFiguresController {
 
 
 
-        Call<covidActivity2.RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
-        call.enqueue(new Callback<covidActivity2.RestSummaryResponse>() {
+        Call<RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
+        call.enqueue(new Callback<RestSummaryResponse>() {
             @Override
-            public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {
+            public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    CovidAPI.Global global = response.body().getGlobal();
+                    Global global = response.body().getGlobal();
                     saveObject(global);
                     view.showGlobal(global);
                 } else {
@@ -71,13 +74,13 @@ public class globalFiguresController {
             }
 
             @Override
-            public void onFailure(Call<covidActivity2.RestSummaryResponse> call, Throwable t) {
+            public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
                 view.showError();
             }
         });
     }
 
-    private void saveObject(CovidAPI.Global global) {
+    private void saveObject(Global global) {
 
         String jsonString = gson.toJson(global);
 

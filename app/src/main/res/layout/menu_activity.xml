@@ -25,13 +25,12 @@
         android:id="@+id/button_listOfCountries"
         android:layout_width="215dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="296dp"
+        android:layout_marginBottom="268dp"
         android:backgroundTint="#ED0606"
         android:text="@string/button_listOfCountries"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -50,7 +49,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_global"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintVertical_bias="0.643" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -107,4 +106,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_send">
     </ListView>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="149dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

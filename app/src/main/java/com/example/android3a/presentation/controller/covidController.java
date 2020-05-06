@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.example.android3a.Singletons;
 import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.model.Countries;
+import com.example.android3a.presentation.model.RestSummaryResponse;
 import com.example.android3a.presentation.view.DetailCountry_Activity;
 import com.example.android3a.presentation.view.covidActivity2;
 import com.google.gson.Gson;
@@ -28,7 +29,6 @@ public class covidController {
     private Gson gson;
     private SharedPreferences sharedPreferences;
     public static List<Countries> countriesList;
-    private static final String BASE_URL = "https://api.covid19api.com/";
 
 
     public covidController(covidActivity2 view, Gson gson, SharedPreferences sharedPreferences) {
@@ -65,12 +65,11 @@ public class covidController {
 
     public void makeApiCall() {
 
-        Call<covidActivity2.RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
-        call.enqueue(new Callback<covidActivity2.RestSummaryResponse>() {
+        Call<RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
+        call.enqueue(new Callback<RestSummaryResponse>() {
             @Override
-            public void onResponse(Call<covidActivity2.RestSummaryResponse> call, Response<covidActivity2.RestSummaryResponse> response) {
+            public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    CovidAPI.Global global = response.body().getGlobal();
                     List<Countries> countriesList = response.body().getCountries();
                     String date = response.body().getDate();
                     saveList(countriesList);
@@ -83,7 +82,7 @@ public class covidController {
             }
 
             @Override
-            public void onFailure(Call<covidActivity2.RestSummaryResponse> call, Throwable t) {
+            public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
                 view.showError();
             }
         });
