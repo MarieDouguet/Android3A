@@ -116,7 +116,12 @@ public class MenuActivity extends AppCompatActivity implements AdapterView.OnIte
             intent = new Intent(getApplicationContext(), AboutActivity.class);
             startActivity(intent);
             finish();
+        }else if (parent.getItemAtPosition(position).equals("Memes")){
+            intent = new Intent(getApplicationContext(), MemeActivity.class);
+            startActivity(intent);
+            finish();
         }
+
     }
 
     @Override

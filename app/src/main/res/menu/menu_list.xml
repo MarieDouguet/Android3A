@@ -25,6 +25,12 @@
         android:checkableBehavior="single">
 
         <item
+            android:id="@+id/memes"
+            android:checked="false"
+            android:icon="@drawable/ic_mood_black_24dp"
+            android:title="@string/memes" />
+
+        <item
             android:id="@+id/useful_links"
             android:checked="false"
             android:icon="@drawable/ic_link_black_24dp"

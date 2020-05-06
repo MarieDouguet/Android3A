@@ -104,6 +104,11 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
                 startActivity(intent);
                 finish();
                 return true;
+            case R.id.memes:
+                intent = new Intent(getApplicationContext(), MemeActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
             case R.id.a_propos:
                 intent = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(intent);

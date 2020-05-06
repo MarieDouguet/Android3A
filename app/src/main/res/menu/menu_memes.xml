@@ -23,18 +23,18 @@
             android:icon="@drawable/ic_world"
             android:title="@string/global_figures" />
 
+
     </group>
 
     <group
         android:id="@+id/group_2"
         android:checkableBehavior="single">
 
-
         <item
-            android:id="@+id/memes"
+            android:id="@+id/useful_links"
             android:checked="false"
-            android:icon="@drawable/ic_mood_black_24dp"
-            android:title="@string/memes" />
+            android:icon="@drawable/ic_link_black_24dp"
+            android:title="@string/useful_links" />
 
         <item
             android:id="@+id/a_propos"

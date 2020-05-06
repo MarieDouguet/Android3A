@@ -123,6 +123,11 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
                 startActivity(intent);
                 finish();
                 return true;
+            case R.id.memes:
+                intent = new Intent(getApplicationContext(), MemeActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
             case R.id.useful_links:
                 intent = new Intent(getApplicationContext(), LinksActivity.class);
                 startActivity(intent);
