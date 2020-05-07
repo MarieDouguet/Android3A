@@ -9,12 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,6 +46,7 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    ImageView picasso;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +100,13 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        picasso = (ImageView) findViewById(R.id.picasso);
+        String url = "https://www.crwflags.com/art/countries/"+country.toLowerCase()+".gif";
+        Picasso.get()
+                .load(url)
+                .into(picasso);
+
     }
 
     ;

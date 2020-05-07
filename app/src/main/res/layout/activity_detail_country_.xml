@@ -125,6 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_NR" />
 
+
         <TextView
             android:id="@+id/textView_Date"
             android:layout_width="fill_parent"
@@ -139,9 +140,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_TR"
-            app:layout_constraintVertical_bias="0.595" />
+            app:layout_constraintVertical_bias="0.808" />
+
+        <ImageView
+            android:id="@+id/picasso"
+            android:layout_width="128dp"
+            android:layout_height="116dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_TR" />
 
         <include layout="@layout/toolbar"></include>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
