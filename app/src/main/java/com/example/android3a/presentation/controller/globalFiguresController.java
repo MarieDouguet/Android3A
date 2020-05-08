@@ -4,10 +4,8 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.android3a.Singletons;
-import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.model.Global;
 import com.example.android3a.presentation.model.RestSummaryResponse;
-import com.example.android3a.presentation.view.covidActivity2;
 import com.example.android3a.presentation.view.globalFigures;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,15 +15,13 @@ import java.lang.reflect.Type;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class globalFiguresController {
 
     private globalFigures view;
     private Gson gson;
     private SharedPreferences sharedPreferences;
-    Global global;
-
-
 
     public globalFiguresController(globalFigures view, Gson gson, SharedPreferences sharedPreferences){
             this.view= view;
@@ -61,7 +57,7 @@ public class globalFiguresController {
 
         Call<RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
         call.enqueue(new Callback<RestSummaryResponse>() {
-            @Override
+            @EverythingIsNonNull
             public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Global global = response.body().getGlobal();
@@ -72,8 +68,7 @@ public class globalFiguresController {
                 }
 
             }
-
-            @Override
+            @EverythingIsNonNull
             public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
                 view.showError();
             }

@@ -18,8 +18,6 @@ import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DetailCountry_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,8 +42,6 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
     String Date;
 
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
-    private Toolbar toolbar;
     ImageView picasso;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +59,7 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
 
         Bundle b = getIntent().getExtras();
 
+        assert b != null;
         country = b.getString("txtHeader");
         countryCode = b.getString("txtFooter");
         NewConfirmed = b.getString("textView_NC");
@@ -83,17 +80,13 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
         textView_TR.setText(TotalRecovered);
         textView_date.setText(Date);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
-        if (country != null) {
-            toolbar.setTitle(country.toUpperCase());
-        } else {
-            //rediriger vers menu
-        }
+        toolbar.setTitle(country.toUpperCase());
         setSupportActionBar(toolbar);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
 
@@ -101,15 +94,13 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        picasso = (ImageView) findViewById(R.id.picasso);
-        String url = "https://www.crwflags.com/art/countries/"+country.toLowerCase()+".gif";
+        picasso = findViewById(R.id.picasso);
+        String url = "https://www.crwflags.com/art/countries/" + country.toLowerCase() + ".gif";
         Picasso.get()
                 .load(url)
                 .into(picasso);
 
     }
-
-    ;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -154,7 +145,7 @@ public class DetailCountry_Activity extends AppCompatActivity implements Navigat
                 finish();
                 return true;
         }
-        
+
         return true;
     }
 

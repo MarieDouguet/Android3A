@@ -15,10 +15,9 @@ import android.view.MenuItem;
 import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class MemeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private Toolbar toolbar;
+public class MemeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
 
     private String[] imageUrls = new String[]{
             "https://static.hitek.fr/img/up_o/1348300528/topmemecoronavirus3.jpg",
@@ -50,11 +49,12 @@ public class MemeActivity extends AppCompatActivity implements NavigationView.On
 
 
         // concernant la navigation view :
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout6);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view6);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        mDrawerLayout = findViewById(R.id.drawer_layout6);
+        NavigationView navigationView = findViewById(R.id.navigation_view6);
 
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();

@@ -12,100 +12,27 @@
         android:id="@+id/button_global"
         android:layout_width="215dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#ED0606"
         android:text="@string/button_global"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/button_listOfCountries"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_listOfCountries"
         android:layout_width="215dp"
         android:layout_height="46dp"
-        android:layout_marginBottom="268dp"
+        android:layout_marginBottom="180dp"
         android:backgroundTint="#ED0606"
         android:text="@string/button_listOfCountries"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ellipsize="none"
-        android:fontFamily="monospace"
-        android:text="@string/Text_presentation"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_global"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.643" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="68dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_listOfCountries">
-
-        <EditText
-            android:id="@+id/et_country"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/hintEditText"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-        <ProgressBar
-            android:id="@+id/pb_search"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:visibility="invisible" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_send"
-        android:layout_width="215dp"
-        android:layout_height="46dp"
-        android:backgroundTint="#ED0606"
-        android:text="@string/rechercher"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.25" />
-
-    <ListView
-        android:id="@+id/lv_recent"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_send">
-    </ListView>
 
     <include
         android:id="@+id/include"
@@ -122,5 +49,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
         app:layout_constraintVertical_bias="1.0" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/button_global"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" >
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_marginBottom="24dp" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

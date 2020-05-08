@@ -1,7 +1,8 @@
 package com.example.android3a.data;
 
 import android.content.SharedPreferences;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.android3a.presentation.model.Countries;
 import com.example.android3a.presentation.model.RestSummaryResponse;
@@ -36,7 +37,7 @@ public class CovidRepository {
         }else{
             covidAPI.getSummaryResponse().enqueue(new Callback<RestSummaryResponse>() {
                 @Override
-                public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
+                public void onResponse(@NonNull Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                     if(response.isSuccessful() && response.body() != null){
                         callback.onSuccess(response.body().getCountries());
                     } else{
@@ -54,7 +55,7 @@ public class CovidRepository {
 
     }
 
-    public List<Countries> getDatafromCache() {
+    private List<Countries> getDatafromCache() {
         String jsonCountries = sharedPreferences.getString("jsonCountriesList", null);
         if (jsonCountries == null) {
             return null;

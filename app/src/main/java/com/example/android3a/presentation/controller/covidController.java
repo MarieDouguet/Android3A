@@ -1,17 +1,19 @@
 package com.example.android3a.presentation.controller;
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.android3a.Singletons;
-import com.example.android3a.data.CovidAPI;
+
 import com.example.android3a.presentation.model.Countries;
 import com.example.android3a.presentation.model.RestSummaryResponse;
-import com.example.android3a.presentation.view.DetailCountry_Activity;
+
 import com.example.android3a.presentation.view.covidActivity2;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -20,8 +22,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.internal.EverythingIsNonNull;
+
 
 public class covidController {
 
@@ -50,7 +52,7 @@ public class covidController {
 
     }
 
-    public void saveList(List<Countries> countriesList) {
+    private void saveList(List<Countries> countriesList) {
 
         String jsonString = gson.toJson(countriesList);
 
@@ -63,15 +65,15 @@ public class covidController {
 
     }
 
-    public void makeApiCall() {
+    private void makeApiCall() {
 
         Call<RestSummaryResponse> call = Singletons.getCovidAPI().getSummaryResponse();
         call.enqueue(new Callback<RestSummaryResponse>() {
+            @EverythingIsNonNull
             @Override
-            public void onResponse(Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
+            public void onResponse(@NonNull Call<RestSummaryResponse> call, Response<RestSummaryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Countries> countriesList = response.body().getCountries();
-                    String date = response.body().getDate();
                     saveList(countriesList);
                     view.showList(countriesList);
 
@@ -81,14 +83,15 @@ public class covidController {
 
             }
 
+            @EverythingIsNonNull
             @Override
-            public void onFailure(Call<RestSummaryResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestSummaryResponse> call, Throwable t) {
                 view.showError();
             }
         });
     }
 
-    public List<Countries> getDatafromCache() {
+    private List<Countries> getDatafromCache() {
         String jsonCountries = sharedPreferences.getString("jsonCountriesList", null);
         if (jsonCountries == null) {
             return null;

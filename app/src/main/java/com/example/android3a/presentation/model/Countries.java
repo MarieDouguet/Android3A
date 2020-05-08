@@ -2,22 +2,33 @@ package com.example.android3a.presentation.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Countries {
 
     private String Country;
     private String CountryCode;
-    private String Slug;
     private Integer NewConfirmed;
     private Integer TotalConfirmed;
     private Integer NewDeaths;
     private Integer TotalDeaths;
     private Integer NewRecovered;
     private Integer TotalRecovered;
-    Date date = new Date();
+    private Date date = new Date();
+
+    public Countries(String country, String countryCode, Integer newConfirmed, Integer totalConfirmed, Integer newDeaths, Integer totalDeaths, Integer newRecovered, Integer totalRecovered) {
+        Country = country;
+        CountryCode = countryCode;
+        NewConfirmed = newConfirmed;
+        TotalConfirmed = totalConfirmed;
+        NewDeaths = newDeaths;
+        TotalDeaths = totalDeaths;
+        NewRecovered = newRecovered;
+        TotalRecovered = totalRecovered;
+    }
 
     public String getDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.FRANCE);
         String dtStr = formatter.format(date);
         return "Updated at : " + dtStr;
     }
@@ -31,9 +42,6 @@ public class Countries {
         return "Country code : " + CountryCode;
     }
 
-    public String getSlug() {
-        return Slug;
-    }
 
     public String getNewConfirmed() {
 

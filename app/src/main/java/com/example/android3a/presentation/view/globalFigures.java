@@ -7,55 +7,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android3a.R;
 import com.example.android3a.Singletons;
-import com.example.android3a.data.CovidAPI;
-import com.example.android3a.presentation.controller.covidController;
 import com.example.android3a.presentation.controller.globalFiguresController;
 import com.example.android3a.presentation.model.Global;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 
-import java.lang.reflect.Type;
+public class globalFigures extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class globalFigures extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
-
-    SharedPreferences sharedPreferences;
-    Gson gson;
-    private TextView Text2;
-    private TextView Text3;
-    private TextView Text4;
-    private TextView Text5;
-    private TextView Text6;
-    private TextView Text7;
-    private TextView Text8;
-
-    private AdapterView adapter;
-    private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
-    private globalFiguresController controller;
-    Global global;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +32,7 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_global_figures);
 
 
-        controller = new globalFiguresController(
+        globalFiguresController controller = new globalFiguresController(
                 this,
                 Singletons.getGson(),
                 Singletons.getSharedPreferences(getApplicationContext())
@@ -71,11 +40,12 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
 
         controller.onStart();
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout3);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view3);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        mDrawerLayout = findViewById(R.id.drawer_layout3);
+        NavigationView navigationView = findViewById(R.id.navigation_view3);
 
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -125,21 +95,21 @@ public class globalFigures extends AppCompatActivity implements NavigationView.O
     }
 
     public void showGlobal(Global global) {
-        Text2 = (TextView) findViewById(R.id.textView2);
-        Text3 = (TextView) findViewById(R.id.textView3);
-        Text4 = (TextView) findViewById(R.id.textView4);
-        Text5 = (TextView) findViewById(R.id.textView5);
-        Text6 = (TextView) findViewById(R.id.textView6);
-        Text7 = (TextView) findViewById(R.id.textView7);
-        Text8 = (TextView) findViewById(R.id.textView8);
+        TextView text2 = findViewById(R.id.textView2);
+        TextView text3 = findViewById(R.id.textView3);
+        TextView text4 = findViewById(R.id.textView4);
+        TextView text5 = findViewById(R.id.textView5);
+        TextView text6 = findViewById(R.id.textView6);
+        TextView text7 = findViewById(R.id.textView7);
+        TextView text8 = findViewById(R.id.textView8);
 
-        Text2.setText(global.getNewConfirmed());
-        Text3.setText(global.getNewDeaths());
-        Text4.setText(global.getNewRecovered());
-        Text5.setText(global.getTotalConfirmed());
-        Text6.setText(global.getTotalDeaths());
-        Text7.setText(global.getTotalRecovered());
-        Text8.setText(global.getDate());
+        text2.setText(global.getNewConfirmed());
+        text3.setText(global.getNewDeaths());
+        text4.setText(global.getNewRecovered());
+        text5.setText(global.getTotalConfirmed());
+        text6.setText(global.getTotalDeaths());
+        text7.setText(global.getTotalRecovered());
+        text8.setText(global.getDate());
 
     }
 

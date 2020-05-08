@@ -15,9 +15,9 @@ import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class AboutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private Toolbar toolbar;
+
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,9 @@ public class AboutActivity extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_about);
 
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout2);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view2);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        mDrawerLayout = findViewById(R.id.drawer_layout2);
+        NavigationView navigationView = findViewById(R.id.navigation_view2);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
@@ -35,8 +36,7 @@ public class AboutActivity extends AppCompatActivity implements NavigationView.O
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        };
+        }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

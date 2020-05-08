@@ -10,15 +10,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.webkit.WebView;
 
 import com.example.android3a.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class LinksActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private Toolbar toolbar;
+public class LinksActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
 
 
     @Override
@@ -27,11 +25,12 @@ public class LinksActivity extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_links);
 
         // concernant la navigation view :
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout5);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view5);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        mDrawerLayout = findViewById(R.id.drawer_layout5);
+        NavigationView navigationView = findViewById(R.id.navigation_view5);
 
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open, R.string.close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();

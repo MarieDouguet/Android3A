@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android3a.R;
@@ -16,9 +17,9 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
 
     private List<Countries> values;
-    public OnItemClickListener listener;
+    private OnItemClickListener listener;
 
-    public ListAdapter(List<Countries> values, OnItemClickListener listener) {
+    ListAdapter(List<Countries> values, OnItemClickListener listener) {
         this.values = values;
         this.listener = listener;
     }
@@ -27,7 +28,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView txtHeader;
         TextView txtFooter;
@@ -37,15 +38,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            button = (Button) v.findViewById(R.id.favBtn);
+            txtHeader = v.findViewById(R.id.firstLine);
+            txtFooter =  v.findViewById(R.id.secondLine);
+            button = v.findViewById(R.id.favBtn);
 
         }
     }
 
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
@@ -83,7 +85,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     public interface OnItemClickListener {
         void onItemClick(Countries values);
     }
-     public void filteredList(List<Countries> filteredList){
+     void filteredList(List<Countries> filteredList){
         values = filteredList;
         notifyDataSetChanged();
      }

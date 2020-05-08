@@ -9,12 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
@@ -23,41 +20,24 @@ import android.widget.Toast;
 
 import com.example.android3a.R;
 import com.example.android3a.Singletons;
-import com.example.android3a.data.CovidAPI;
 import com.example.android3a.presentation.controller.covidController;
 import com.example.android3a.presentation.model.Countries;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class covidActivity2 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
 
-    private EditText editText;
-
-    private RecyclerView recyclerView;
     private ListAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    SharedPreferences sharedPreferences;
-    Gson gson;
 
     covidController controller;
-    private List<Countries> countriesList;
+
+
 
 
     @Override
@@ -74,8 +54,8 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         controller.onStart();
 
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout4);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view4);
+        mDrawerLayout =  findViewById(R.id.drawer_layout4);
+        NavigationView navigationView = findViewById(R.id.navigation_view4);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open, R.string.close);
@@ -84,7 +64,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        editText = (EditText) findViewById(R.id.edit_text);
+        EditText editText = findViewById(R.id.edit_text);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -106,7 +86,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
 
     public void filter(String text) {
         ArrayList<Countries> filteredList = new ArrayList<>();
-        countriesList = controller.countriesList;
+        List<Countries> countriesList = covidController.countriesList;
 
         for (Countries item : countriesList) {
             if (item.getCountry().toLowerCase().contains(text.toLowerCase())) {
@@ -115,7 +95,7 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
         }
         mAdapter.filteredList(filteredList);
     }
-
+    //Menu sur le côté
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.isChecked()) {
@@ -160,10 +140,10 @@ public class covidActivity2 extends AppCompatActivity implements NavigationView.
     }
 
     public void showList(List<Countries> countriesList) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         mAdapter = new ListAdapter(countriesList, new ListAdapter.OnItemClickListener() {
