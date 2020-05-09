@@ -4,7 +4,7 @@
 
 Ce projet démontre l'utilisation du design pattern MVC, le tout codé en JAVA.
 
-Covid-19 est une application affichant les nombres totaux de personnes ayant été confirmés comme nouveaux cas victimes du Coronavirus, les personnes décédées suite au virus et les personnes guéries. Aussi, on peut recueuillir le détail par pays de ces nombres.
+Covid-19 est une application affichant les nombres totaux de personnes ayant été confirmés comme nouveaux cas victimes du Coronavirus, les personnes décédées suite au virus et les personnes guéries. Aussi, on peut recueillir le détail par pays de ces nombres.
 
 ## Prérequis
 
