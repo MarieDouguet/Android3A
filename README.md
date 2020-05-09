@@ -64,7 +64,7 @@ Logo de l'application et bouton permettant d'accéder au menu principal
  
  * Affiche les différents chiffres sur le Coronavirus dans le pays
  * Drapeau du pays changeant en fonction du pays affiché
- * Menu sur le côté permettant d'accéder à toutes les pages de l'application (toutes les pages en sont équipées et elle change à chaque fois en fonction de la page où l'on se trouve actuellement)
+ * Menu sur le côté permettant d'accéder à toutes les pages de l'application (toutes les pages en sont équipées et il change à chaque fois en fonction de la page où l'on se trouve actuellement)
  
  <div class = "images">
  
